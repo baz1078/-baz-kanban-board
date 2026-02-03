@@ -1,0 +1,48 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Recruit 5 contractors in Aurora area",
+      "description": "Find licensed home inspectors in Aurora, IL. Check ASHI and InterNACHI directories.",
+      "priority": "High",
+      "category": "Contractor Recruitment",
+      "due_date": "2024-12-20",
+      "status": "pending",
+      "created": "2024-12-07"
+    },
+    {
+      "id": 2,
+      "title": "Set up AI email automation",
+      "description": "Configure auto-response system for inspection inquiries",
+      "priority": "High",
+      "category": "AI Development",
+      "due_date": "2024-12-15",
+      "status": "pending",
+      "created": "2024-12-07"
+    },
+    {
+      "id": 3,
+      "title": "Draft white-label pricing strategy",
+      "description": "Research competitor pricing and finalize tier structure",
+      "priority": "Medium",
+      "category": "White-Label SaaS",
+      "due_date": "2024-12-25",
+      "status": "pending",
+      "created": "2024-12-07"
+    }
+  ],
+  "contractors": [
+    {
+      "id": 1,
+      "name": "Demo Inspector",
+      "email": "demo@example.com",
+      "phone": "630-555-0100",
+      "areas": ["Naperville", "Aurora"],
+      "specialties": ["Residential", "Radon"],
+      "status": "Active",
+      "joined": "2024-01-01",
+      "inspections_completed": 47
+    }
+  ],
+  "inspections": []
+}
