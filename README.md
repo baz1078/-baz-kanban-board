@@ -1,34 +1,35 @@
 # Assure Home Inspections - Kanban Board
 
-A Streamlit-based Kanban board for managing tasks and projects for Assure Home Inspections.
+A Streamlit-based Kanban board for tracking business growth and AI development tasks.
 
-## Features
+## Setup
 
-- **5 Columns**: Backlog, To Do, In Progress, Review, Done
-- **Task Categories**: Business Development, AI Integration, White-label SaaS, Operational Efficiency, Marketing & Branding
-- **Color-coded tasks** by category
-- **Move tasks** between columns with arrow buttons
-- **Delete tasks** with trash button
-- **Add new tasks** via sidebar
-- **Filter by category**
-- **Progress tracking** with statistics
-- **Persistent storage** using JSON file
-
-## Installation
-
+1. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-## Running
-
+2. Run the app:
 ```bash
 streamlit run app.py
 ```
 
-## Goals
+## Features
 
-- Grow Assure Inspections to 30-50 contractors in Chicago
-- Build autonomous AI agent
-- Create white-label SaaS for other inspectors
-- Integrate AI with business operations
+- 5 columns: Backlog, To Do, In Progress, Review, Done
+- 4 task categories with color coding:
+  - Business Growth (Green)
+  - AI Agent Development (Blue)
+  - White-Label SaaS (Purple)
+  - AI Integration (Orange)
+- Add, move, and delete tasks
+- Progress tracking
+- Persistent storage (JSON file)
+- Reset board to defaults
+
+## Usage
+
+- Click **➕ Add New Task** to create new tasks
+- Use **◀ ▶** buttons to move tasks between columns
+- Use **🗑** to delete tasks
+- Click **🔄 Reset Board** to restore default tasks
