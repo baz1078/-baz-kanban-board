@@ -1,0 +1,24 @@
+{
+  "columns": ["Backlog", "To Do", "In Progress", "Review", "Done"],
+  "tasks": [
+    {"id": 1, "title": "Research potential contractors", "description": "Identify and compile list of potential contractors in Chicago area", "column": "Backlog", "priority": "High", "category": "Business Growth", "created": "2024-01-01"},
+    {"id": 2, "title": "Outreach and onboarding process", "description": "Develop standardized process for contractor outreach and onboarding", "column": "Backlog", "priority": "High", "category": "Business Growth", "created": "2024-01-01"},
+    {"id": 3, "title": "Develop marketing materials", "description": "Create brochures, flyers, and digital assets for marketing", "column": "Backlog", "priority": "Medium", "category": "Business Growth", "created": "2024-01-01"},
+    {"id": 4, "title": "Execute social media and local advertising", "description": "Launch marketing campaigns on social media and local platforms", "column": "Backlog", "priority": "Medium", "category": "Business Growth", "created": "2024-01-01"},
+    {"id": 5, "title": "Define AI agent requirements", "description": "Document specific requirements and use cases for autonomous AI agent", "column": "Backlog", "priority": "High", "category": "AI Agent Development", "created": "2024-01-01"},
+    {"id": 6, "title": "Research AI tools/technologies", "description": "Evaluate and select appropriate AI frameworks and technologies", "column": "Backlog", "priority": "High", "category": "AI Agent Development", "created": "2024-01-01"},
+    {"id": 7, "title": "Develop AI MVP", "description": "Build minimum viable product for AI agent", "column": "Backlog", "priority": "Medium", "category": "AI Agent Development", "created": "2024-01-01"},
+    {"id": 8, "title": "Test and iterate AI agent", "description": "Conduct testing and refine based on feedback", "column": "Backlog", "priority": "Medium", "category": "AI Agent Development", "created": "2024-01-01"},
+    {"id": 9, "title": "Identify SaaS key features", "description": "Define essential features for white-label inspection SaaS", "column": "Backlog", "priority": "Medium", "category": "White-Label SaaS", "created": "2024-01-01"},
+    {"id": 10, "title": "Design UI/UX for SaaS", "description": "Create user interface and experience designs", "column": "Backlog", "priority": "Medium", "category": "White-Label SaaS", "created": "2024-01-01"},
+    {"id": 11, "title": "Develop core SaaS functionalities", "description": "Build main features of the SaaS platform", "column": "Backlog", "priority": "Low", "category": "White-Label SaaS", "created": "2024-01-01"},
+    {"id": 12, "title": "Beta testing with inspectors", "description": "Conduct beta testing with select home inspectors", "column": "Backlog", "priority": "Low", "category": "White-Label SaaS", "created": "2024-01-01"},
+    {"id": 13, "title": "Map business processes for AI", "description": "Document all business processes that could benefit from AI", "column": "Backlog", "priority": "High", "category": "AI Integration", "created": "2024-01-01"},
+    {"id": 14, "title": "Identify AI automation areas", "description": "Determine which tasks can be automated with AI", "column": "Backlog", "priority": "High", "category": "AI Integration", "created": "2024-01-01"},
+    {"id": 15, "title": "Implement AI solutions", "description": "Deploy AI solutions for identified areas", "column": "Backlog", "priority": "Medium", "category": "AI Integration", "created": "2024-01-01"},
+    {"id": 16, "title": "Monitor and optimize AI performance", "description": "Track AI performance and make improvements", "column": "Backlog", "priority": "Low", "category": "AI Integration", "created": "2024-01-01"},
+    {"id": 17, "title": "Streamline scheduling/dispatching", "description": "Improve efficiency of scheduling and dispatching processes", "column": "Backlog", "priority": "High", "category": "Operational Improvements", "created": "2024-01-01"},
+    {"id": 18, "title": "Implement customer feedback system", "description": "Create system to collect and analyze customer feedback", "column": "Backlog", "priority": "Medium", "category": "Operational Improvements", "created": "2024-01-01"},
+    {"id": 19, "title": "Update inspection checklists", "description": "Review and modernize inspection checklists", "column": "Backlog", "priority": "Medium", "category": "Operational Improvements", "created": "2024-01-01"}
+  ]
+}
