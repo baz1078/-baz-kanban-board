@@ -6,18 +6,58 @@ from pathlib import Path
 # Data file path
 DATA_FILE = "kanban_data.json"
 
-# Default board structure
+# Default Kanban data
 DEFAULT_DATA = {
-    "columns": ["To Do (Backlog)", "In Progress", "Done"],
+    "columns": ["Backlog", "To Do", "In Progress", "Review", "Done"],
     "tasks": [
-        {"id": 1, "title": "Develop marketing strategy to target Chicago area", "column": "To Do (Backlog)", "created": "2024-01-01", "priority": "High"},
-        {"id": 2, "title": "Create website landing page for new clients", "column": "To Do (Backlog)", "created": "2024-01-01", "priority": "High"},
-        {"id": 3, "title": "Implement customer feedback system", "column": "To Do (Backlog)", "created": "2024-01-01", "priority": "Medium"},
-        {"id": 4, "title": "Research and select project management software", "column": "To Do (Backlog)", "created": "2024-01-01", "priority": "Medium"},
-        {"id": 5, "title": "Plan expansion to 30-50 contractors in Chicago", "column": "To Do (Backlog)", "created": "2024-01-01", "priority": "High"},
-        {"id": 6, "title": "Start development of autonomous AI agent", "column": "To Do (Backlog)", "created": "2024-01-01", "priority": "High"},
-        {"id": 7, "title": "Investigate white-label SaaS options for other inspectors", "column": "To Do (Backlog)", "created": "2024-01-01", "priority": "Medium"},
-        {"id": 8, "title": "Explore AI integration possibilities with business operations", "column": "To Do (Backlog)", "created": "2024-01-01", "priority": "Medium"},
+        {
+            "id": 1,
+            "title": "Expand Contractor Network",
+            "description": "- Research potential contractors in the Chicago area.\n- Develop a contractor onboarding process.\n- Reach out to and sign up 5 new contractors.",
+            "column": "Backlog",
+            "priority": "High",
+            "created": "2024-01-15"
+        },
+        {
+            "id": 2,
+            "title": "AI Agent Development",
+            "description": "- Define AI agent's initial tasks and responsibilities.\n- Research suitable AI platforms and tools.\n- Create an outline for AI agent training and implementation.",
+            "column": "Backlog",
+            "priority": "High",
+            "created": "2024-01-15"
+        },
+        {
+            "id": 3,
+            "title": "White-Label SaaS Creation",
+            "description": "- Identify core features and functionalities required.\n- Develop a basic prototype of the platform.\n- Test the prototype with a small group of users.",
+            "column": "Backlog",
+            "priority": "Medium",
+            "created": "2024-01-15"
+        },
+        {
+            "id": 4,
+            "title": "AI Integration with Business Operations",
+            "description": "- Map out current business operations.\n- Identify areas where AI can be integrated for efficiency.\n- Develop an integration plan and timeline.",
+            "column": "Backlog",
+            "priority": "Medium",
+            "created": "2024-01-15"
+        },
+        {
+            "id": 5,
+            "title": "Marketing Campaign for Expansion",
+            "description": "- Define target audience for expansion.\n- Develop marketing materials (e.g., brochures, social media posts).\n- Plan and schedule a series of promotional activities.",
+            "column": "Backlog",
+            "priority": "Medium",
+            "created": "2024-01-15"
+        },
+        {
+            "id": 6,
+            "title": "Customer Feedback System",
+            "description": "- Design a customer feedback form or survey.\n- Implement the feedback system on the website and email communications.\n- Analyze initial feedback to identify areas for improvement.",
+            "column": "Backlog",
+            "priority": "Low",
+            "created": "2024-01-15"
+        }
     ]
 }
 
@@ -31,164 +71,159 @@ def save_data(data):
     with open(DATA_FILE, "w") as f:
         json.dump(data, f, indent=2)
 
-def get_next_id(tasks):
-    if not tasks:
-        return 1
-    return max(task["id"] for task in tasks) + 1
-
-# Page config
-st.set_page_config(
-    page_title="Assure Home Inspections - Kanban Board",
-    page_icon="🏠",
-    layout="wide"
-)
-
-# Custom CSS
-st.markdown("""
-<style>
-    .kanban-column {
-        background-color: #f0f2f6;
-        border-radius: 10px;
-        padding: 10px;
-        min-height: 400px;
+def get_priority_color(priority):
+    colors = {
+        "High": "#ff4b4b",
+        "Medium": "#ffa600",
+        "Low": "#00cc66"
     }
-    .task-card {
-        background-color: white;
+    return colors.get(priority, "#808080")
+
+def main():
+    st.set_page_config(
+        page_title="Assure Inspections - Kanban Board",
+        page_icon="🏠",
+        layout="wide"
+    )
+    
+    # Custom CSS
+    st.markdown("""
+    <style>
+    .kanban-card {
+        background: #1e1e1e;
         border-radius: 8px;
         padding: 12px;
         margin-bottom: 10px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        border-left: 4px solid #1f77b4;
+        border-left: 4px solid;
     }
-    .task-card-high {
-        border-left-color: #e74c3c;
+    .kanban-title {
+        font-weight: bold;
+        font-size: 14px;
+        margin-bottom: 8px;
     }
-    .task-card-medium {
-        border-left-color: #f39c12;
+    .kanban-desc {
+        font-size: 12px;
+        color: #888;
+        margin-bottom: 8px;
     }
-    .task-card-low {
-        border-left-color: #27ae60;
+    .priority-badge {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 11px;
+        font-weight: bold;
     }
     .column-header {
-        font-size: 1.2em;
-        font-weight: bold;
+        background: #2d2d2d;
         padding: 10px;
-        text-align: center;
         border-radius: 8px;
+        text-align: center;
         margin-bottom: 15px;
+        font-weight: bold;
     }
-    .todo-header { background-color: #3498db; color: white; }
-    .progress-header { background-color: #f39c12; color: white; }
-    .done-header { background-color: #27ae60; color: white; }
     .stButton button {
         width: 100%;
     }
-</style>
-""", unsafe_allow_html=True)
-
-# Initialize session state
-if "data" not in st.session_state:
-    st.session_state.data = load_data()
-
-# Header
-st.title("🏠 Assure Home Inspections")
-st.subheader("Project Kanban Board - Naperville, IL")
-st.markdown("---")
-
-# Sidebar for adding new tasks
-with st.sidebar:
-    st.header("➕ Add New Task")
-    new_task_title = st.text_area("Task Description", height=100)
-    new_task_priority = st.selectbox("Priority", ["High", "Medium", "Low"])
-    new_task_column = st.selectbox("Add to Column", st.session_state.data["columns"])
+    </style>
+    """, unsafe_allow_html=True)
     
-    if st.button("Add Task", type="primary"):
-        if new_task_title.strip():
-            new_task = {
-                "id": get_next_id(st.session_state.data["tasks"]),
-                "title": new_task_title.strip(),
-                "column": new_task_column,
-                "created": datetime.now().strftime("%Y-%m-%d"),
-                "priority": new_task_priority
-            }
-            st.session_state.data["tasks"].append(new_task)
+    # Initialize session state
+    if "data" not in st.session_state:
+        st.session_state.data = load_data()
+    
+    # Header
+    st.title("🏠 Assure Home Inspections")
+    st.subheader("Strategic Kanban Board - Naperville, IL")
+    st.markdown("---")
+    
+    # Sidebar for adding new tasks
+    with st.sidebar:
+        st.header("➕ Add New Task")
+        
+        new_title = st.text_input("Task Title")
+        new_description = st.text_area("Description")
+        new_column = st.selectbox("Column", st.session_state.data["columns"])
+        new_priority = st.selectbox("Priority", ["High", "Medium", "Low"])
+        
+        if st.button("Add Task", type="primary"):
+            if new_title:
+                new_id = max([t["id"] for t in st.session_state.data["tasks"]], default=0) + 1
+                st.session_state.data["tasks"].append({
+                    "id": new_id,
+                    "title": new_title,
+                    "description": new_description,
+                    "column": new_column,
+                    "priority": new_priority,
+                    "created": datetime.now().strftime("%Y-%m-%d")
+                })
+                save_data(st.session_state.data)
+                st.success("Task added!")
+                st.rerun()
+            else:
+                st.error("Please enter a title")
+        
+        st.markdown("---")
+        st.header("📊 Statistics")
+        for col in st.session_state.data["columns"]:
+            count = len([t for t in st.session_state.data["tasks"] if t["column"] == col])
+            st.metric(col, count)
+        
+        st.markdown("---")
+        if st.button("🔄 Reset to Default"):
+            st.session_state.data = DEFAULT_DATA.copy()
             save_data(st.session_state.data)
-            st.success("Task added!")
             st.rerun()
-        else:
-            st.error("Please enter a task description")
     
-    st.markdown("---")
-    st.header("📊 Statistics")
-    for col in st.session_state.data["columns"]:
-        count = len([t for t in st.session_state.data["tasks"] if t["column"] == col])
-        st.metric(col, count)
+    # Main Kanban Board
+    columns = st.columns(len(st.session_state.data["columns"]))
     
-    st.markdown("---")
-    if st.button("🔄 Reset to Default"):
-        st.session_state.data = DEFAULT_DATA.copy()
-        save_data(st.session_state.data)
-        st.rerun()
-
-# Main Kanban Board
-cols = st.columns(3)
-
-column_styles = {
-    "To Do (Backlog)": "todo-header",
-    "In Progress": "progress-header",
-    "Done": "done-header"
-}
-
-for idx, column_name in enumerate(st.session_state.data["columns"]):
-    with cols[idx]:
-        # Column header
-        header_class = column_styles.get(column_name, "todo-header")
-        st.markdown(f'<div class="column-header {header_class}">{column_name}</div>', unsafe_allow_html=True)
-        
-        # Get tasks for this column
-        column_tasks = [t for t in st.session_state.data["tasks"] if t["column"] == column_name]
-        
-        # Display tasks
-        for task in column_tasks:
-            priority_class = f"task-card-{task['priority'].lower()}"
+    for idx, col_name in enumerate(st.session_state.data["columns"]):
+        with columns[idx]:
+            # Column header with count
+            task_count = len([t for t in st.session_state.data["tasks"] if t["column"] == col_name])
+            st.markdown(f'<div class="column-header">{col_name} ({task_count})</div>', unsafe_allow_html=True)
             
-            with st.container():
-                st.markdown(f"""
-                <div class="task-card {priority_class}">
-                    <strong>{task['title']}</strong><br>
-                    <small>📅 {task['created']} | 🏷️ {task['priority']}</small>
-                </div>
-                """, unsafe_allow_html=True)
+            # Tasks in this column
+            col_tasks = [t for t in st.session_state.data["tasks"] if t["column"] == col_name]
+            
+            for task in col_tasks:
+                priority_color = get_priority_color(task["priority"])
                 
-                # Task actions
-                col1, col2, col3 = st.columns(3)
-                
-                with col1:
-                    # Move left
-                    current_idx = st.session_state.data["columns"].index(column_name)
-                    if current_idx > 0:
-                        if st.button("⬅️", key=f"left_{task['id']}"):
-                            task["column"] = st.session_state.data["columns"][current_idx - 1]
-                            save_data(st.session_state.data)
-                            st.rerun()
-                
-                with col2:
-                    # Delete
-                    if st.button("🗑️", key=f"del_{task['id']}"):
+                with st.container():
+                    st.markdown(f"""
+                    <div class="kanban-card" style="border-left-color: {priority_color};">
+                        <div class="kanban-title">{task['title']}</div>
+                        <div class="kanban-desc">{task['description'][:100]}...</div>
+                        <span class="priority-badge" style="background: {priority_color};">{task['priority']}</span>
+                    </div>
+                    """, unsafe_allow_html=True)
+                    
+                    # Move buttons
+                    col1, col2 = st.columns(2)
+                    
+                    current_idx = st.session_state.data["columns"].index(col_name)
+                    
+                    with col1:
+                        if current_idx > 0:
+                            if st.button("◀", key=f"left_{task['id']}"):
+                                task["column"] = st.session_state.data["columns"][current_idx - 1]
+                                save_data(st.session_state.data)
+                                st.rerun()
+                    
+                    with col2:
+                        if current_idx < len(st.session_state.data["columns"]) - 1:
+                            if st.button("▶", key=f"right_{task['id']}"):
+                                task["column"] = st.session_state.data["columns"][current_idx + 1]
+                                save_data(st.session_state.data)
+                                st.rerun()
+                    
+                    # Delete button
+                    if st.button("🗑️ Delete", key=f"del_{task['id']}"):
                         st.session_state.data["tasks"] = [t for t in st.session_state.data["tasks"] if t["id"] != task["id"]]
                         save_data(st.session_state.data)
                         st.rerun()
-                
-                with col3:
-                    # Move right
-                    if current_idx < len(st.session_state.data["columns"]) - 1:
-                        if st.button("➡️", key=f"right_{task['id']}"):
-                            task["column"] = st.session_state.data["columns"][current_idx + 1]
-                            save_data(st.session_state.data)
-                            st.rerun()
-                
-                st.markdown("---")
+                    
+                    st.markdown("---")
 
-# Footer
-st.markdown("---")
-st.markdown("**🎯 Goals:** Grow to 30-50 contractors in Chicago | Build autonomous AI agent | Create white-label SaaS | Integrate AI with operations")
+if __name__ == "__main__":
+    main()

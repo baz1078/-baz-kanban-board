@@ -1,36 +1,26 @@
 # Assure Home Inspections - Kanban Board
 
-A simple project management Kanban board for Assure Home Inspections, Naperville, IL.
+Strategic task management board for Assure Home Inspections, Naperville, IL.
 
 ## Features
-
-- Three-column Kanban board (To Do, In Progress, Done)
-- Add new tasks with priority levels (High, Medium, Low)
-- Move tasks between columns with arrow buttons
-- Delete tasks
+- 5-column Kanban workflow (Backlog → To Do → In Progress → Review → Done)
+- Priority levels with color coding (High/Medium/Low)
+- Add, move, and delete tasks
 - Persistent storage (JSON file)
 - Task statistics in sidebar
-- Color-coded priorities
+- Reset to default tasks
 
-## Installation
+## Quick Start
 
 ```bash
 pip install -r requirements.txt
-```
-
-## Running the App
-
-```bash
 streamlit run app.py
 ```
 
-## Usage
-
-1. **Add Tasks**: Use the sidebar form to add new tasks with title, priority, and target column
-2. **Move Tasks**: Use ⬅️ and ➡️ buttons to move tasks between columns
-3. **Delete Tasks**: Use 🗑️ button to remove tasks
-4. **Reset**: Use the "Reset to Default" button to restore original backlog
-
-## Data Storage
-
-Tasks are saved to `kanban_data.json` in the same directory.
+## Goals Tracked
+1. Expand Contractor Network (30-50 contractors in Chicago)
+2. AI Agent Development (autonomous task execution)
+3. White-Label SaaS Creation (for other inspectors)
+4. AI Integration with Business Operations
+5. Marketing Campaign for Expansion
+6. Customer Feedback System
